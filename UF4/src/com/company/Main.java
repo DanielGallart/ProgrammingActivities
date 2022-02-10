@@ -52,7 +52,7 @@ public class Main {
                 String DNI2 = llegirString("Escriu el teu DNI per entrar com a usuari.");
                 personaActual = getPersonaByDNI(persones, DNI2);
                 if (personaActual != null) {
-                    segonMenu(personaActual, gossos);
+                    segonMenu(personaActual, gossos, persones);
                 } else {
                     System.out.println("ERROR. Aquesta persona no existeix.");
                     primerMenu(persones, gossos);
@@ -74,11 +74,28 @@ public class Main {
         }
     }
 
-    private static void segonMenu(Persona personaActual, ArrayList<Gos> gossos) {
-        int opcio = llegirEnter("Quin gos vols adoptar?",1, gossos.size()-1);
+    private static void segonMenu(Persona personaActual, ArrayList<Gos> gossos, ArrayList<Persona> persones) {
+        int opcio = llegirEnter("Què vols fer?\n\t1.-Adoptar un gos\n\t2.-Jugar amb un gos\n\t3.-Tornar enrere\n\t4.-Sortir de l'aplicació", 1, 4);
+
+        switch(opcio){
+            case 1:
+                int gosAdoptat = llegirEnter("Quin gos vols adoptar?",1, gossos.size()-1);
+                adoptarGos(gossos.get(gosAdoptat), personaActual);
+                segonMenu(personaActual, gossos, persones);
+                break;
+            case 2:
+                menuJugar(personaActual, gossos, persones);
+                break;
+            case 3:
+                primerMenu(persones, gossos);
+                break;
+            case 4:
+                System.out.println("SORTINT DE L'APLICACIÓ...");
+                break;
+        }
     }
 
-    private static void menuJugar(Persona personaActual, ArrayList<Gos> gossosAEscollir) {
+    private static void menuJugar(Persona personaActual, ArrayList<Gos> gossosAEscollir, ArrayList<Persona> persones) {
         int opcio = llegirEnter("Hola, què vols fer amb el teu gos?\n\t1- Treure'l a passejar\n\t2- Donar-li menjar\n\t3- Posar-lo a dormir\n\t4.-Tornar enrere\n\t5- Sortir",1, 5);
         ArrayList<Gos> gossos = personaActual.getGossos();
         int numGos;
@@ -92,7 +109,7 @@ public class Main {
                 numGos = llegirEnter("",0, gossos.size());
 
                 gossos.get(numGos).passejar();
-                menuJugar(personaActual, gossosAEscollir);
+                menuJugar(personaActual, gossosAEscollir, persones);
                 break;
             case 2:
                 String tipusMenjar;
@@ -103,7 +120,7 @@ public class Main {
                 numGos = llegirEnter("",0, gossos.size());
                 tipusMenjar = llegirString("Quin tipus de menjar li vols donar? (Pinso / Entrecot)");
                 gossos.get(numGos).donarMenjar(tipusMenjar);
-                menuJugar(personaActual, gossosAEscollir);
+                menuJugar(personaActual, gossosAEscollir, persones);
                 break;
             case 3:
                 int hores;
@@ -114,10 +131,10 @@ public class Main {
                 numGos = llegirEnter("",0, gossos.size());
                 hores = llegirEnter("Quantes hores vols que dormi el teu gos " + gossos.get(numGos).getNom(),1, 12);
                 gossos.get(numGos).dormir(hores);
-                menuJugar(personaActual, gossosAEscollir);
+                menuJugar(personaActual, gossosAEscollir, persones);
                 break;
             case 4:
-                segonMenu(personaActual, gossosAEscollir);
+                segonMenu(personaActual, gossosAEscollir, persones);
                 break;
             case 5:
                 System.out.println("Adéu");
@@ -144,6 +161,21 @@ public class Main {
             }
         }
         return null;
+    }
+
+    private static Gos getGosByName(ArrayList<Gos> gossos, String nom) {
+        Gos gos;
+        for (int i = 0; i < gossos.size(); i++) {
+            if (gossos.get(i).getNom().equals(nom)) {
+                return gossos.get(i);
+            }
+        }
+        return null;
+    }
+
+    private static void adoptarGos(Gos gos, Persona personActual){
+        personActual.adoptarGos(gos);
+        gos.setPropietari(personActual);
     }
 
     /**
