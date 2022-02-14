@@ -180,7 +180,6 @@ public class Main {
 
     /**
      * Aquest mètode serveix per llegir un enter de teclat amb control d'errors.
-     *
      * @param missatge: Serveix per passar-li el text a mostrar del menú.
      * @param min:      Valor mínim acceptat
      * @param max:      Valor màxim acceptat

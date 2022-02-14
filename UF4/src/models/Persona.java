@@ -6,9 +6,10 @@ public class Persona {
     private String nom;
     private String cognom1;
     private String cognom2;
+    private String DNI;
     private int edat;
     private String pais;
-    private String DNI;
+
     private ArrayList<Gos> gossos;
 
     public Persona(String nom, String cognom1, String cognom2, int edat, String pais, String DNI) {
