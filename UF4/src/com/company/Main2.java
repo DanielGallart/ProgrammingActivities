@@ -2,24 +2,19 @@ package com.company;
 
 import models.Persona2;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
+import utils.Utilities;
 
 public class Main2 {
-    public static final String BLACK_BOLD_BRIGHT = "\033[1;90m"; // NEGRO
     public static final String RED_BOLD_BRIGHT = "\033[1;91m";   // ROJO
     public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // VERDE
-    public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// AMARILLO
-    public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // AZUL
-    public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// MORADO
     public static final String CYAN_BOLD_BRIGHT = "\033[1;96m";  // CYAN
-    public static final String WHITE_BOLD_BRIGHT = "\033[1;97m"; // BLANCO
-    public static final String RESET = "\033[0m";
 
     public static void main(String[] args) {
-        ArrayList<Persona2> persones = new ArrayList<Persona2>();
+        ArrayList<Persona2> persones = new ArrayList<>();
         Persona2 persona = new Persona2("Daniel", "Gallart", "Álvarez", "23842866P");
-        Persona2.sumPersonesCreades();
+        Persona2.personesCreades++;
         persones.add(persona);
 
         System.out.println(GREEN_BOLD_BRIGHT + "BENVINGUT AL PROGRAMA");
@@ -27,16 +22,20 @@ public class Main2 {
         menuInicial(persones);
     }
 
+    /**
+     * Mètode pel menú principal
+     * @param persones array list amb totes les persones
+     */
     private static void menuInicial(ArrayList<Persona2> persones){
         Persona2 personaActual;
-        int opcio = llegirEnter("Què vols fer?\n\t1.-Crear persona\n\t2.-Actualitzar persona\n\t3.-Log in com a persona\n\t4.-Eliminar persona\n\t5.-Veure número de persones creades\n\t6.-Sortir", 1, 6);
+        int opcio = Utilities.llegirEnter("Què vols fer?\n\t1.-Crear persona\n\t2.-Actualitzar persona\n\t3.-Log in com a persona\n\t4.-Eliminar persona\n\t5.-Veure número de persones creades\n\t6.-Sortir", 1, 6);
 
         switch (opcio){
             case 1:
-                String nom = llegirString("Escriu el teu nom.");
-                String cognom1 = llegirString("Escriu el teu primer cognom.");
-                String cognom2 = llegirString("Escriu el teu segon cognom.");
-                String DNI = llegirString("Escriu el teu DNI.");
+                String nom = Utilities.llegirString("Escriu el teu nom.");
+                String cognom1 = Utilities.llegirString("Escriu el teu primer cognom.");
+                String cognom2 = Utilities.llegirString("Escriu el teu segon cognom.");
+                String DNI = Utilities.llegirString("Escriu el teu DNI.");
 
                 personaActual = crearPersona(nom, cognom1, cognom2, DNI);
                 if(existeixPersona(persones, personaActual.getDNI())){
@@ -44,15 +43,17 @@ public class Main2 {
                     menuInicial(persones);
                 }
                 persones.add(crearPersona(nom, cognom1, cognom2, DNI));
-                Persona2.sumPersonesCreades();
+                Persona2.personesCreades++;
                 System.out.println(CYAN_BOLD_BRIGHT + "Persona creada correctament");
                 menuPersona(persones, personaActual);
                 break;
             case 2:
-                String DNI2 = llegirString("Escriu el DNI de la persona que vols actualitzar.");
+                String DNI2 = Utilities.llegirString("Escriu el DNI de la persona que vols actualitzar.");
+                actualitzarPersona(persones, DNI2);
+                menuInicial(persones);
                 break;
             case 3:
-                String DNI3 = llegirString("Escriu el teu DNI.");
+                String DNI3 = Utilities.llegirString("Escriu el teu DNI.");
                 personaActual = logPersona(persones, DNI3);
                 if(personaActual == null){
                     System.out.println(RED_BOLD_BRIGHT + "No existeix aquesta persona.");
@@ -64,11 +65,11 @@ public class Main2 {
                 }
                 break;
             case 4:
-                String DNI4 = llegirString("Escriu el DNI de la persona que vol eliminar.");
+                String DNI4 = Utilities.llegirString("Escriu el DNI de la persona que vol eliminar.");
                 if(existeixPersona(persones, DNI4)){
                     eliminarPersona(persones, DNI4);
                     System.out.println(CYAN_BOLD_BRIGHT + "Persona eliminada amb èxit.");
-                    Persona2.subtractPersonesCreades();
+                    Persona2.personesCreades--;
                 }
                 else{
                     System.out.println(RED_BOLD_BRIGHT + "No es pot eliminar aquesta persona perquè no existeix.");
@@ -76,7 +77,7 @@ public class Main2 {
                 menuInicial(persones);
                 break;
             case 5:
-                Persona2.getPersonesCreades();
+                System.out.println(Persona2.personesCreades);
                 menuInicial(persones);
             case 6:
                 System.out.println(GREEN_BOLD_BRIGHT + "SORTINT DE L'APLICACIÓ...");
@@ -84,13 +85,18 @@ public class Main2 {
         }
     }
 
+    /**
+     * Menú per quan s'ha iniciat sessió com a persona
+     * @param persones array list amb totes les persones
+     * @param personaActual la persona amb la qual s'ha iniciat sessió
+     */
     private static void menuPersona(ArrayList<Persona2> persones, Persona2 personaActual){
-        int opcio = llegirEnter(personaActual.getNom() + " " + personaActual.getCognom1() + " , què vols fer?\n\t1.-Mostrar persona\n\t2.-Dir nom\n\t3.-Mostrar edat" +
+        int opcio = Utilities.llegirEnter(personaActual.getNom() + " " + personaActual.getCognom1() + " , què vols fer?\n\t1.-Mostrar persona\n\t2.-Dir nom\n\t3.-Mostrar edat" +
                 "\n\t4.-Parlar\n\t5.-Vacunar (AstraZeneca/Physer/Moderna)\n\t6.-Dormir\n\t7.Tirar enrere\n\t8-Sortir", 1, 8);
 
         switch (opcio){
             case 1:
-                System.out.println(CYAN_BOLD_BRIGHT + personaActual.toString());
+                System.out.println(CYAN_BOLD_BRIGHT + personaActual);
                 menuPersona(persones, personaActual);
                 break;
             case 2:
@@ -111,7 +117,7 @@ public class Main2 {
                 menuPersona(persones, personaActual);
                 break;
             case 5:
-                String vacuna = llegirString("Escriu la vacuna que et vols ficar.");
+                String vacuna = Utilities.llegirString("Escriu la vacuna que et vols ficar.");
                 personaActual.vacunar(vacuna);
                 menuPersona(persones, personaActual);
                 break;
@@ -138,20 +144,30 @@ public class Main2 {
      * @return retorna la persona creada
      */
     private static Persona2 crearPersona(String nom, String cognom1, String cognom2, String DNI){
-        Persona2 persona = new Persona2(nom, cognom1, cognom2, DNI);
-        return persona;
+        return new Persona2(nom, cognom1, cognom2, DNI);
     }
 
+    /**
+     * Mètode per fer log in d'una persona
+     * @param persones array list amb totes les persones
+     * @param DNI DNI de la persona amb la que vull fer log in
+     * @return retorna la persona
+     */
     private static Persona2 logPersona(ArrayList<Persona2> persones, String DNI){
         Persona2 personaActual = null;
-        for (int i = 0; i < persones.size(); i++) {
-            if(persones.get(i).getDNI().equals(DNI)){
-                personaActual = persones.get(i);
+        for (Persona2 persone : persones) {
+            if (persone.getDNI().equals(DNI)) {
+                personaActual = persone;
             }
         }
         return personaActual;
     }
 
+    /**
+     * Mètode per eliminar una persona
+     * @param persones array list amb totes les persones
+     * @param DNI DNI de la persona que es vol eliminar
+     */
     private static void eliminarPersona(ArrayList<Persona2> persones, String DNI){
         for (int i = 0; i < persones.size(); i++) {
             if(persones.get(i).getDNI().equals(DNI)){
@@ -160,9 +176,47 @@ public class Main2 {
         }
     }
 
+    /**
+     * Mètode per actualitzar les dades d'una persona
+     * @param persones array list amb totes les persones
+     * @param DNI DNI de la persona que volem actualitzar
+     */
+    private static void actualitzarPersona(ArrayList<Persona2> persones, String DNI){
+        int pos = getPosicioPersona(persones, DNI);
+        Persona2 persona;
+        if(pos > -1 ){
+            persona = persones.get(pos);
+            String nom = Utilities.llegirString("Escriu el teu nom.");
+            String cognom1 = Utilities.llegirString("Escriu el teu primer cognom.");
+            String cognom2 = Utilities.llegirString("Escriu el teu segon cognom.");
+            int diaNaixement = Utilities.llegirEnter("Escriu el teu dia de naixement.", 1, 31);
+            int mesNaixement = Utilities.llegirEnter("Escriu el teu mes de naixement.", 1, 12);
+            int anyNaixement = Utilities.llegirEnter("Escriu el teu any de naixement.", 0, LocalDate.now().getYear());
+            LocalDate dataNaixement = LocalDate.of(anyNaixement, mesNaixement, diaNaixement);
+            String genere = Utilities.llegirString("Escriu el teu gènere.");
+            int alcada = Utilities.llegirEnter("Esciu la teva alçada (cm).", 100, 250);
+            persona.setNom(nom);
+            persona.setCognom1(cognom1);
+            persona.setCognom2(cognom2);
+            persona.setDataNaixement(dataNaixement);
+            persona.setGenere(genere);
+            persona.setAlcada(alcada);
+            System.out.println(CYAN_BOLD_BRIGHT + "Persona actualitzada correctament.");
+        }
+        else{
+            System.out.println(RED_BOLD_BRIGHT + "No es pot actualitzar aquesta persona perquè no existeix.");
+        }
+    }
+
+    /**
+     * Mètode pero saber si una persona existeix o no
+     * @param persones array list amb totes les persones
+     * @param DNI DNI per identificar la persona
+     * @return true si existeix, false si no
+     */
     private static boolean existeixPersona(ArrayList<Persona2> persones, String DNI){
-        for (int i = 0; i < persones.size(); i++) {
-            if(persones.get(i).getDNI().equals(DNI)){
+        for (Persona2 persona : persones) {
+            if (persona.getDNI().equals(DNI)) {
                 return true;
             }
         }
@@ -170,78 +224,18 @@ public class Main2 {
     }
 
     /**
-     * Aquest mètode serveix per llegir un enter de teclat amb control d'errors.
-     * @param missatge: Serveix per passar-li el text a mostrar del menú.
-     * @param min:      Valor mínim acceptat
-     * @param max:      Valor màxim acceptat
-     * @return : retorna un enter dins del domini de valors
+     * Mètode per trobar la posició d'una persona dins de l'array list
+     * @param persones array list amb totes les persones
+     * @param DNI DNI per identificar la persona
+     * @return -1 si no està, la posició en la que es troba si està
      */
-    public static int llegirEnter(String missatge, int min, int max) {
-        Scanner llegir = new Scanner(System.in);
-        int opcio = 0;
-        boolean valorCorrecte = false;
-
-        do {
-            System.out.println(PURPLE_BOLD_BRIGHT + missatge);
-
-            valorCorrecte = llegir.hasNextInt();
-
-            if (!valorCorrecte) {
-                System.out.println(RED_BOLD_BRIGHT + "ERROR: No has introduït un enter");
-                llegir.nextLine();
-            } else {
-                opcio = llegir.nextInt();
-                llegir.nextLine();
-
-                if (opcio < min || opcio > max) {
-                    System.out.println(RED_BOLD_BRIGHT + "ERROR: Opció no correcte");
-                    valorCorrecte = false;
-                }
+    private static int getPosicioPersona(ArrayList<Persona2> persones, String DNI){
+        for (int i = 0; i < persones.size(); i++) {
+            if(persones.get(i).getDNI().equals(DNI)){
+                return i;
             }
-
-        } while (!valorCorrecte);
-
-        return opcio;
+        }
+        return -1;
     }
 
-    /**
-     * Mètode per llegir un float amb control d'errors
-     * @param missatge missatge que se li vol mostrar a l'usuari
-     * @return valor que ha introduit l'usuari després del control d'errors
-     */
-    public static float llegirFloat(String missatge) {
-        Scanner llegir = new Scanner(System.in);
-        float opcio = 0;
-        boolean valorCorrecte = false;
-
-        do {
-            System.out.println(PURPLE_BOLD_BRIGHT + missatge);
-
-            valorCorrecte = llegir.hasNextFloat();
-
-            if (!valorCorrecte) {
-                System.out.println(RED_BOLD_BRIGHT + "ERROR: No has introduït un enter");
-                llegir.nextLine();
-            } else {
-                opcio = llegir.nextFloat();
-                llegir.nextLine();
-            }
-
-        } while (!valorCorrecte);
-
-        return opcio;
-    }
-
-    /**
-     * Mètode per llegir un enter de teclat
-     * @param missatge text que se li vol mostrar a l'usuari
-     * @return retorna un string amb el text imprès per l'usuari
-     */
-    public static String llegirString(String missatge) {
-        System.out.println(PURPLE_BOLD_BRIGHT + missatge);
-        Scanner input = new Scanner(System.in);
-        String text = input.nextLine();
-
-        return text;
-    }
 }

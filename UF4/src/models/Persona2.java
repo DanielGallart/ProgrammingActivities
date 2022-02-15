@@ -3,16 +3,6 @@ package models;
 import java.time.LocalDate;
 
 public class Persona2 {
-    private String BLACK_BOLD_BRIGHT = "\033[1;90m"; // NEGRO
-    private String RED_BOLD_BRIGHT = "\033[1;91m";   // ROJO
-    private String GREEN_BOLD_BRIGHT = "\033[1;92m"; // VERDE
-    private String YELLOW_BOLD_BRIGHT = "\033[1;93m";// AMARILLO
-    private String BLUE_BOLD_BRIGHT = "\033[1;94m";  // AZUL
-    private String PURPLE_BOLD_BRIGHT = "\033[1;95m";// MORADO
-    private static String CYAN_BOLD_BRIGHT = "\033[1;96m";  // CYAN
-    private String WHITE_BOLD_BRIGHT = "\033[1;97m"; // BLANCO
-    private String RESET = "\033[0m";
-
 
     private String nom;
     private String cognom1;
@@ -27,12 +17,25 @@ public class Persona2 {
     private int codiPostal;
     public static int personesCreades;
 
+    /**
+     * Constructor de persona amb 3 paràmetres
+     * @param nom nom de la persona
+     * @param cognom1 primer cognom de la persona
+     * @param cognom2 segon cognom de la persona
+     */
     public Persona2(String nom, String cognom1, String cognom2) {
         this.nom = nom;
         this.cognom1 = cognom1;
         this.cognom2 = cognom2;
     }
 
+    /**
+     * Constructor amb 4 paràmetres
+     * @param nom nom de la persona
+     * @param cognom1 primer cognom de la persona
+     * @param cognom2 segon cognom de la persona
+     * @param DNI DNI de la persona
+     */
     public Persona2(String nom, String cognom1, String cognom2, String DNI) {
         this.nom = nom;
         this.cognom1 = cognom1;
@@ -104,7 +107,7 @@ public class Persona2 {
         this.vacunatCovid = vacunatCovid;
     }
 
-    public boolean isMajorEdat() {
+    public boolean esMajorEdat() {
         return majorEdat;
     }
 
@@ -112,7 +115,7 @@ public class Persona2 {
         this.majorEdat = majorEdat;
     }
 
-    public boolean isCarnetConduir() {
+    public boolean teCarnetConduir() {
         return carnetConduir;
     }
 
@@ -131,23 +134,23 @@ public class Persona2 {
     public void vacunar(String vacuna){
         if(vacuna.equalsIgnoreCase("AstraZeneca") || vacuna.equalsIgnoreCase("Physer") || vacuna.equalsIgnoreCase("Moderna")){
             this.vacunatCovid = true;
-            System.out.println(CYAN_BOLD_BRIGHT + "Gràcies per vacunar-te.");
+            System.out.println("Gràcies per vacunar-te.");
         }
         else{
-            System.out.println(RED_BOLD_BRIGHT + "No tenim aquesta vacuna, no el podem vacunar.");
+            System.out.println("No tenim aquesta vacuna, no el podem vacunar.");
         }
     }
 
     public void dormir(){
-        System.out.println(CYAN_BOLD_BRIGHT + "zzzzzzzzzz...");
+        System.out.println("zzzzzzzzzz...");
     }
 
     public void parlar(){
-        System.out.println(CYAN_BOLD_BRIGHT + "bla bla bla...");
+        System.out.println("bla bla bla...");
     }
 
     public void dirNom(){
-        System.out.println(CYAN_BOLD_BRIGHT + "Hola, em dic " + this.nom + " " + this.cognom1 + " " + this.cognom2 + ".");
+        System.out.println("Hola, em dic " + this.nom + " " + this.cognom1 + " " + this.cognom2 + ".");
     }
 
     public void mostrarEdat(){
@@ -155,25 +158,7 @@ public class Persona2 {
         int anyActual = LocalDate.now().getYear();
         int edat = anyActual - anyNaixement;
 
-        System.out.println(CYAN_BOLD_BRIGHT + "Tens " + edat + " anys.");
-    }
-
-    public static void getPersonesCreades(){
-        if(personesCreades == 1){
-            System.out.println(CYAN_BOLD_BRIGHT +"S'ha creat " + personesCreades + " persona.");
-        }
-        else{
-            System.out.println(CYAN_BOLD_BRIGHT + "S'han creat " + personesCreades + " persones.");
-        }
-
-    }
-
-    public static void sumPersonesCreades(){
-        personesCreades++;
-    }
-
-    public static void subtractPersonesCreades(){
-        personesCreades--;
+        System.out.println("Tens " + edat + " anys.");
     }
 
     @Override
