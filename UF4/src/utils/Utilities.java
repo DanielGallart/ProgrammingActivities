@@ -45,7 +45,7 @@ public final class Utilities {
 
     /**
      * Mètode per llegir un float amb control d'errors
-     * @param missatge missatge que se li vol mostrar a l'usuari
+     * @param missatge: missatge que se li vol mostrar a l'usuari
      * @return valor que ha introduit l'usuari després del control d'errors
      */
     public static float llegirFloat(String missatge) {
@@ -65,6 +65,39 @@ public final class Utilities {
                 opcio = llegir.nextFloat();
                 llegir.nextLine();
             }
+
+        } while (!valorCorrecte);
+
+        return opcio;
+    }
+
+    /**
+     * Mètode per llegir un float amb control d'errors
+     * @param missatge missatge que se li vol mostrar a l'usuari
+     * @param min: valor mínim que pot agafar el número
+     * @param max: valor màxim que pot agafar el número
+     * @return valor que ha introduit l'usuari després del control d'errors
+     */
+    public static float llegirFloatLimit(String missatge, int min, int max) {
+        Scanner llegir = new Scanner(System.in);
+        float opcio = 0;
+        boolean valorCorrecte;
+
+        do {
+            System.out.println(PURPLE_BOLD_BRIGHT + missatge);
+
+            valorCorrecte = llegir.hasNextFloat();
+
+            if (!valorCorrecte) {
+                System.out.println(RED_BOLD_BRIGHT + "ERROR: No has introduït un enter");
+            } else {
+                opcio = llegir.nextFloat();
+                if(opcio < min || opcio > max){
+                    System.out.println(RED_BOLD_BRIGHT + "ERROR: Valor fora de rang");
+                    valorCorrecte = false;
+                }
+            }
+            llegir.nextLine();
 
         } while (!valorCorrecte);
 
