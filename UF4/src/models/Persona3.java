@@ -176,34 +176,66 @@ public class Persona3 {
         return vacunatCovid;
     }
 
+    /**
+     * Mètode per canviar si està vacunat o no
+     * @param vacunatCovid boolean de si està vacunat o no
+     */
     public void setVacunatCovid(boolean vacunatCovid) {
         this.vacunatCovid = vacunatCovid;
     }
 
+    /**
+     * Mètode per saber si és major d'edat
+     * @return true si és major d'edat, false si no ho és
+     */
     public boolean esMajorEdat() {
         return majorEdat;
     }
 
+    /**
+     * Mètode per canviar si té la majoria d'edat o no
+     * @param majorEdat boolean de si té la majoria d'edat
+     */
     public void setMajorEdat(boolean majorEdat) {
         this.majorEdat = majorEdat;
     }
 
+    /**
+     * Mètode per saber si té carnet de conduir
+     * @return true si té el carnet, false si no el té
+     */
     public boolean teCarnetConduir() {
         return carnetConduir;
     }
 
+    /**
+     * Mètode per canviar si té carnet de conduir
+     * @param carnetConduir boolean de si té el carnet o no
+     */
     public void setCarnetConduir(boolean carnetConduir) {
         this.carnetConduir = carnetConduir;
     }
 
+    /**
+     * Mètode per saber el codi postal
+     * @return codi postal
+     */
     public int getCodiPostal() {
         return codiPostal;
     }
 
+    /**
+     * Mètode per canviar el codi postal
+     * @param codiPostal nou codi postal
+     */
     public void setCodiPostal(int codiPostal) {
         this.codiPostal = codiPostal;
     }
 
+    /**
+     * Mètode per vacunar una persona
+     * @param vacuna vacuna que es vol posar
+     */
     public void vacunar(String vacuna){
         if(vacuna.equalsIgnoreCase("AstraZeneca") || vacuna.equalsIgnoreCase("Physer") || vacuna.equalsIgnoreCase("Moderna")){
             this.vacunatCovid = true;
@@ -214,10 +246,16 @@ public class Persona3 {
         }
     }
 
+    /**
+     * Mètode per fer dormir una persona
+     */
     public void dormir(){
         System.out.println("zzzzzzzzzz...");
     }
 
+    /**
+     * Mètode per fer parlar una persona
+     */
     public void parlar(){
         System.out.println("bla bla bla...");
     }
