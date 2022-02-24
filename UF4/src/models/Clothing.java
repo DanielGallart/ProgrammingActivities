@@ -1,6 +1,6 @@
 package models;
 
-public class Clothing {
+public abstract class Clothing {
     private String cod;
     private double price;
     private String size;
@@ -54,6 +54,8 @@ public class Clothing {
     public void setGenre(char genre) {
         this.genre = genre;
     }
+
+    public abstract double finalPrice();
 
     @Override
     public String toString() {

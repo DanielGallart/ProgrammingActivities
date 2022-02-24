@@ -16,6 +16,11 @@ public class Socks extends Clothing{
         this.length = length;
     }
 
+    public double finalPrice() {
+        double profitMargin = 0.05;
+        return super.getPrice() / (1-profitMargin);
+    }
+
     @Override
     public String toString() {
         return "Socks{" +

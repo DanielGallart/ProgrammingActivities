@@ -6,6 +6,8 @@ public final class Utilities {
     private static final String RED_BOLD_BRIGHT = "\033[1;91m";   // ROJO
     private static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// MORADO
 
+    private static Scanner input = new Scanner(System.in);
+
     private Utilities(){}
 
     /**
@@ -16,21 +18,20 @@ public final class Utilities {
      * @return : retorna un enter dins del domini de valors
      */
     public static int llegirEnter(String missatge, int min, int max) {
-        Scanner llegir = new Scanner(System.in);
         int opcio = 0;
         boolean valorCorrecte;
 
         do {
             System.out.println(PURPLE_BOLD_BRIGHT + missatge);
 
-            valorCorrecte = llegir.hasNextInt();
+            valorCorrecte = input.hasNextInt();
 
             if (!valorCorrecte) {
                 System.out.println(RED_BOLD_BRIGHT + "ERROR: No has introduït un enter");
-                llegir.nextLine();
+                input.nextLine();
             } else {
-                opcio = llegir.nextInt();
-                llegir.nextLine();
+                opcio = input.nextInt();
+                input.nextLine();
 
                 if (opcio < min || opcio > max) {
                     System.out.println(RED_BOLD_BRIGHT + "ERROR: Opció no correcte");
@@ -49,21 +50,20 @@ public final class Utilities {
      * @return valor que ha introduit l'usuari després del control d'errors
      */
     public static float llegirFloat(String missatge) {
-        Scanner llegir = new Scanner(System.in);
         float opcio = 0;
         boolean valorCorrecte;
 
         do {
             System.out.println(PURPLE_BOLD_BRIGHT + missatge);
 
-            valorCorrecte = llegir.hasNextFloat();
+            valorCorrecte = input.hasNextFloat();
 
             if (!valorCorrecte) {
                 System.out.println(RED_BOLD_BRIGHT + "ERROR: No has introduït un enter");
-                llegir.nextLine();
+                input.nextLine();
             } else {
-                opcio = llegir.nextFloat();
-                llegir.nextLine();
+                opcio = input.nextFloat();
+                input.nextLine();
             }
 
         } while (!valorCorrecte);
@@ -79,25 +79,24 @@ public final class Utilities {
      * @return valor que ha introduit l'usuari després del control d'errors
      */
     public static float llegirFloatLimit(String missatge, int min, int max) {
-        Scanner llegir = new Scanner(System.in);
         float opcio = 0;
         boolean valorCorrecte;
 
         do {
             System.out.println(PURPLE_BOLD_BRIGHT + missatge);
 
-            valorCorrecte = llegir.hasNextFloat();
+            valorCorrecte = input.hasNextFloat();
 
             if (!valorCorrecte) {
                 System.out.println(RED_BOLD_BRIGHT + "ERROR: No has introduït un enter");
             } else {
-                opcio = llegir.nextFloat();
+                opcio = input.nextFloat();
                 if(opcio < min || opcio > max){
                     System.out.println(RED_BOLD_BRIGHT + "ERROR: Valor fora de rang");
                     valorCorrecte = false;
                 }
             }
-            llegir.nextLine();
+            input.nextLine();
 
         } while (!valorCorrecte);
 
@@ -111,8 +110,20 @@ public final class Utilities {
      */
     public static String llegirString(String missatge) {
         System.out.println(PURPLE_BOLD_BRIGHT + missatge);
-        Scanner input = new Scanner(System.in);
 
         return input.nextLine();
+    }
+
+    /**
+     * Mètode per llegir un char
+     * @param missatge missatge que se li vol mostrar a l'usuari
+     * @return un char
+     */
+    public static char llegirChar(String missatge){
+        String paraula;
+        paraula = input.next();
+        input.nextLine();
+
+        return paraula.charAt(0);
     }
 }

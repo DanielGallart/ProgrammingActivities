@@ -16,6 +16,22 @@ public class Jeans extends Clothing{
         this.type = type;
     }
 
+    public double finalPrice(){
+        double profitMargin;
+        switch (type){
+            case "slim":
+                profitMargin=0.10;
+                break;
+            case "fit":
+                profitMargin=0.15;
+                break;
+            default:
+                profitMargin=0.20;
+                break;
+        }
+        return super.getPrice() / (1-profitMargin);
+    }
+
     @Override
     public String toString() {
         return "Jeans{" +

@@ -14,6 +14,9 @@ public class MainShop {
         for (Clothing cloth : clothes) {
             System.out.println(cloth);
         }
+        clothes.get(0).setPrice(50);
+        System.out.println(clothes.get(0));
+        System.out.println(clothes.get(0).getPrice());
     }
 
     private static void initClothing(ArrayList<Clothing> clothes){
