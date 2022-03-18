@@ -5,10 +5,11 @@ import java.util.Date;
 
 public class E01_2_2 {
     public static void main(String[] args) {
-        listarDescargasCompleto();
+        E01_2_2 main = new E01_2_2();
+        main.listarDescargasCompleto();
     }
 
-    private static void listarDescargasCompleto(){
+    private void listarDescargasCompleto(){
         String home = System.getProperty("user.home");
         String rutaCompleta = home + File.separator + "Downloads";
         File descargas = new File(rutaCompleta);
@@ -25,7 +26,7 @@ public class E01_2_2 {
         
     }
     
-    private static void recorrerElementosDescargas(File[] files){
+    private void recorrerElementosDescargas(File[] files){
         final float KBYTESIZEINBITES = 1024;
         long millisec;
         Date lastModifiedDate;
