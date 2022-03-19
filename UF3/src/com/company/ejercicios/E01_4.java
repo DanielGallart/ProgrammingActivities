@@ -13,14 +13,15 @@ public class E01_4 {
 
     private void readText(){
         float average = 0, count = 0;
+        float aux;
         try {
             File myObj = new File("src/files/numbers.txt");
             Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                average += Float.parseFloat(myReader.next());
-                count++;
-                String data = myReader.nextLine();
+            while (myReader.hasNext()) {
+                String data = myReader.next();
                 System.out.println(data);
+                average += Float.parseFloat(data);
+                count++;
             }
             System.out.println(average + " " + count);
             myReader.close();
