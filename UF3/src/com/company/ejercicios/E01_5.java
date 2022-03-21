@@ -1,5 +1,6 @@
 package com.company.ejercicios;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.text.DecimalFormat;
 
@@ -22,7 +23,12 @@ public class E01_5 {
                 fw.write("\n");
             }
             fw.close();
-        }catch(Exception e){System.out.println(e);}
+        }catch (FileNotFoundException fnfe){
+            System.out.println(fnfe.getMessage());
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     private float calcularNumeroAleatorio(Byte maxNum, Byte minNum){
