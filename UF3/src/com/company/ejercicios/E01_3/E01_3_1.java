@@ -29,19 +29,27 @@ public class E01_3_1 {
         }
         catch(Exception e){
             System.out.println("ERROR: " + e.getMessage());
+        }finally{
+            return fotos;
         }
-        return fotos;
     }
 
     private void moverFotos(){
         String home = System.getProperty("user.home");
         String rutaCompleta = home + File.separator + "Downloads";
         File descargas = new File(rutaCompleta);
-        File[] elementosDescargas = new File[0];
+        File[] elementosDescargas = descargas.listFiles();
         File fotos = crearDirectorio();
-
+        String name;
+        String []values;
         for (File f: elementosDescargas) {
-
+            name = f.getName();
+            name = name.replace('.',';');
+            values = name.split(";");
+            String path = fotos.getName() + File.separator + f.getName();
+            if(values[values.length-1].equalsIgnoreCase("png")){
+                f.renameTo(new File(path));
+            }
         }
     }
 
