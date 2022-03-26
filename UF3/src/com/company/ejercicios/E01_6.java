@@ -31,6 +31,8 @@ public class E01_6 {
         float averageScore = 0;
         int count = 0, totalElementsCounter = 0, auxTotalElementsCounter = 0;
 
+        //Abro un fichero auxiliar igual al fichero que quiero leer
+        // y cuento cuantas lineas hay para saber la última y así no escribir una línea de más
         try{
             auxInput = new Scanner(file);
             while(auxInput.hasNextLine()){
@@ -47,7 +49,7 @@ public class E01_6 {
             }
         }
 
-
+        //Leo el archivo que quiero y compruebo si ya he llegado a la última línea que quiero escribir
         try{
             input = new Scanner(file);
             while (input.hasNextLine()){
@@ -64,6 +66,7 @@ public class E01_6 {
                 }
                 auxValues[3] = String.valueOf(averageScore/count);
                 System.out.println(averageScore/count);
+                //Compruebo si las líneas escritas coinciden con el total de líneas que hay
                 fw = writeToFile(auxValues, fw, totalElementsCounter==auxTotalElementsCounter);
                 averageScore=0;
                 count=0;
@@ -95,6 +98,8 @@ public class E01_6 {
                     fw.write(s + ";");
                 }
                 else{
+                    //Si es la última línea, no poner el salto de línea para no escribir una línea
+                    //más de la cuenta
                     if(last){
                         fw.write(s);
                     }
