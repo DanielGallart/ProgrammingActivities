@@ -11,8 +11,13 @@ public class E01_6 {
     public static void main(String[] args) {
         E01_6 main = new E01_6();
         try{
-            File file = new File("scores.txt");
-            main.readFromFile(file);
+            File file = new File("src" + File.separator + "scores.txt");
+            File newFile = new File("src" + File.separator + "files" + File.separator + "medias.txt");
+            if(!newFile.exists()){
+                newFile.createNewFile();
+            }
+            FileWriter fw = new FileWriter(newFile);
+            main.readFromFile(file, fw);
         }catch (NullPointerException npe){
             System.out.println("ERROR --> " + npe.getMessage());
         }catch (Exception e){
@@ -20,48 +25,91 @@ public class E01_6 {
         }
     }
 
-    private void readFromFile(File file){
+    private void readFromFile(File file, FileWriter fw){
         DecimalFormat numberFormat = new DecimalFormat("#.##");
-        Scanner input = null;
+        Scanner auxInput = null, input = null;
         float averageScore = 0;
-        int count = 0;
+        int count = 0, totalElementsCounter = 0, auxTotalElementsCounter = 0;
+
+        try{
+            auxInput = new Scanner(file);
+            while(auxInput.hasNextLine()){
+                totalElementsCounter++;
+                auxInput.nextLine();
+            }
+        }catch(FileNotFoundException fnfe){
+            System.out.println("ERROR lectura --> " + fnfe.getMessage());
+        }catch (Exception e){
+            System.out.println("ERROR lectura general --> " + e.getMessage());
+        }finally{
+            if(auxInput != null){
+                auxInput.close();
+            }
+        }
+
+
         try{
             input = new Scanner(file);
             while (input.hasNextLine()){
+                auxTotalElementsCounter++;
                 String line = input.nextLine();
                 String[] values = line.split(";");
-                averageScore+=Integer.parseInt(values[1]);
-                count++;
+                String[] auxValues = new String[4];
+                for (int i = 0; i < 3; i++) {
+                    auxValues[i] = values [i];
+                }
+                for (int i = 3; i < values.length; i++) {
+                    averageScore+=Float.parseFloat(values[i]);
+                    count++;
+                }
+                auxValues[3] = String.valueOf(averageScore/count);
+                System.out.println(averageScore/count);
+                fw = writeToFile(auxValues, fw, totalElementsCounter==auxTotalElementsCounter);
+                averageScore=0;
+                count=0;
+
             }
         }catch(FileNotFoundException fnfe){
-            System.out.println("ERROR." + fnfe.getMessage());
+            System.out.println("ERROR lectura --> " + fnfe.getMessage());
         }catch (Exception e){
-            System.out.println("ERROR." + e.getMessage());
+            System.out.println("ERROR lectura general --> " + e.getMessage());
         }finally{
-            if(input != null){
-                input.close();
-                averageScore /= count;
-                System.out.println("Average score: " + numberFormat.format(averageScore));
+            try{
+                if(input != null){
+                    input.close();
+                    fw.close();
+                }
+            }catch (IOException ioe){
+                System.out.println("ERROR cerrar --> " + ioe.getMessage());
+            }catch(Exception e){
+                System.out.println("ERROR cerrar general --> " + e.getMessage());
             }
         }
     }
 
-    private void writeToFile(String[] text, FileWriter fw){
+    private FileWriter writeToFile(String[] text, FileWriter fw, boolean last){
         try{
             byte count = 0;
             for (String s: text) {
-                if(count < text.length - 2){
+                if(count < text.length - 1){
                     fw.write(s + ";");
                 }
                 else{
-                    fw.write(s);
+                    if(last){
+                        fw.write(s);
+                    }
+                    else{
+                        fw.write(s + "\n");
+                    }
                 }
+                count++;
             }
         }catch(IOException ioe){
-            System.out.println("ERROR --> " + ioe.getMessage());
+            System.out.println("ERROR escritura --> " + ioe.getMessage());
         }catch(Exception e){
-            System.out.println("ERROR --> " + e.getMessage());
+            System.out.println("ERROR escritura general --> " + e.getMessage());
+        }finally {
+            return fw;
         }
-
     }
 }
