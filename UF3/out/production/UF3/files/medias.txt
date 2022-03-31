@@ -1,0 +1,2 @@
+Maria;Perez;Perez;8.0Juan;Garcia;Tres;7.125
+Sandra;Gonzalez;Perez;5.25
