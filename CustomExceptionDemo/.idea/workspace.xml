@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b820ced-e500-4130-942b-a01add5f21d7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/Ejercicio3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UF3/src/files/texto.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UF3/out/production/UF3/files/medias.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../UF3/out/production/UF3/files/medias.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/Ejercicio1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/Ejercicio1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/Ejercicio2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/Ejercicio2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/customExceptions/Checked.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/customExceptions/Unchecked.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/Ejercicio3.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UF3/src/com/company/repasoExamen/excepciones/Ejercicio3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

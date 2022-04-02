@@ -1,5 +1,8 @@
 package com.company.repasoExamen.excepciones;
 
+import com.company.repasoExamen.excepciones.customExceptions.Checked;
+import com.company.repasoExamen.excepciones.customExceptions.Unchecked;
+
 import java.util.*;
 
 public class Ejercicio3 {
@@ -19,6 +22,21 @@ public class Ejercicio3 {
 
         users = generate(quantity);
 
+        try{
+            for (int i = 0; i < users.length ; i++) {
+                if(checkUser(users[i],checkedUsers)){
+                    checkedUsers.add(users[i]);
+                }
+            }
+        }catch (Unchecked u){
+            System.out.println("ERROR longitud --> " + u.getMessage());
+        }catch (Checked c){
+            System.out.println("ERROR duplicado --> " + c.getMessage());
+        }catch (Exception e){
+            System.out.println("ERROR genérico --> " + e.getMessage());
+        }
+
+        showUsers(checkedUsers);
     }
 
     private static String[] generate(int quantity) {
@@ -33,5 +51,28 @@ public class Ejercicio3 {
     private static String getName() {
         Random rand = new Random();
         return String.format("%s %s %s", names.get(rand.nextInt(names.size())), surnames.get(rand.nextInt(surnames.size())), surnames.get(rand.nextInt(surnames.size())));
+    }
+
+    private static boolean checkUser(String user, List<String> checkedUsers) throws Checked, Unchecked {
+        boolean validUser = true;
+        if(user.length() > userLimitLength){
+            validUser = false;
+            throw new Unchecked("Usuario demasiado largo.");
+        }
+        else if(checkedUsers.size() > 1){
+            for (int i = 0; i < checkedUsers.size(); i++) {
+                if(checkedUsers.get(i).equals(user)){
+                    validUser = false;
+                    throw new Checked("Usuario ya existente.");
+                }
+            }
+        }
+        return validUser;
+    }
+
+    private static void showUsers(List<String> users){
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println(users.get(i));
+        }
     }
 }
