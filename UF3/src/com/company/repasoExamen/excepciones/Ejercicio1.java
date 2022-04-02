@@ -1,6 +1,7 @@
 package com.company.repasoExamen.excepciones;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -22,8 +23,16 @@ public class Ejercicio1 {
             System.out.println("Here is our Integer Array:");
             System.out.println(Arrays.toString(anArray));
             System.out.print("Enter the index you want to display: ");
-            int selection = entry.nextInt();
-            System.out.println("Your selction:["+anArray[selection] +"]" );
+            try{
+                int selection = entry.nextInt();
+                System.out.println("Your selction:["+anArray[selection] +"]" );
+            }catch (ArrayIndexOutOfBoundsException aioobe){
+                System.out.println("ERROR posición no existente --> " + aioobe.getMessage());
+            }catch(InputMismatchException ime){
+                System.out.println("ERROR tipo no adecuado --> " + ime.getMessage());
+            }catch (Exception e){
+                System.out.println("ERROR --> " + e.getMessage());
+            }
 
             System.out.println("Exit application?: yes or no");
             String decision = entry.next();
