@@ -1,0 +1,5 @@
+HIPATIA;360-415;Alexandria;matemàtica,filòsofa,astrònoma,escriptora,inventora
+ADA LOVELACE;1815-1852;Londres;matemàtica,programadora,poeta,informàtica,inventora
+KATHERINE JOHNSON;1918-2020;Hampton;informàtica,física,enginyera aeroespacial,matemàtica,professora
+MARIE SKLODOWSKA CURIE;1867-1934;Passy;física,química,professora
+MARYAM MIRZAKHANI;1977-2017;Palo Alto;matemàtica,topóloga,professora
