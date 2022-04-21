@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -15,32 +16,35 @@ public class HelloController {
     @FXML
     private Button closeButton, redButton, greenButton, blueButton, yellowButton;
     @FXML
-    private Pane mainPane;
+    private VBox mainPane;
     @FXML
     private Label closeText;
 
     @FXML
-    protected void onCloseButtonClick() {
+    private void onCloseButtonClick() throws InterruptedException{
         Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.setScene(new Scene(new Label("Closing app... Bye bye"), 200, 100));
+        stage.show();
+        Thread.sleep(2000);
         stage.close();
     }
 
     @FXML
-    protected void onRedButtonClick(){
+    private void onRedButtonClick(){
         mainPane.setBackground(new Background(new BackgroundFill(Color.rgb(255,0,0),null,null)));
     }
 
     @FXML
-    protected void onBlueButtonClick(){
+    private void onBlueButtonClick(){
         mainPane.setBackground(new Background(new BackgroundFill(Color.rgb(0,0,255),null,null)));
     }
 
     @FXML
-    protected void onGreenButtonClick(){
+    private void onGreenButtonClick(){
         mainPane.setBackground(new Background(new BackgroundFill(Color.rgb(0,255,0),null,null)));
     }
     @FXML
-    protected void onYellowButtonClick(){
+    private void onYellowButtonClick(){
         mainPane.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,0),null,null)));
     }
 }
