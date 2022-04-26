@@ -8,12 +8,20 @@ public abstract class Fighter extends GameCharacter {
     public Fighter(String nom, int strength, int agility, int endurance, int intellect, int spirit) {
         super(nom, strength, agility, endurance, intellect, spirit);
     }
-    protected void win(){
+    public void win(){
         victories ++;
     }
-    protected void lose(){
+    public void lose(){
         loseLive();
         defeats++;
+    }
+
+    public int getVictories(){
+        return victories;
+    }
+
+    public int getDefeat(){
+        return defeats;
     }
 
     @Override
