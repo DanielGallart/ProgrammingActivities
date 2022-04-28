@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox fx:id="mainPane" alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.interfazgraficaprueba.HelloController">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="redButton" layoutX="114.0" layoutY="113.0" mnemonicParsing="false" onAction="#onRedButtonClick" text="Red" />
+            <Button fx:id="yellowButton" layoutX="105.0" layoutY="254.0" mnemonicParsing="false" onAction="#onYellowButtonClick" text="Yellow" />
+            <Button fx:id="closeButton" layoutX="272.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close" />
+            <Button fx:id="greenButton" layoutX="408.0" layoutY="113.0" mnemonicParsing="false" onAction="#onGreenButtonClick" text="Green" />
+            <Button fx:id="blueButton" layoutX="413.0" layoutY="254.0" mnemonicParsing="false" onAction="#onBlueButtonClick" text="Blue" />
+            <Label fx:id="closeText" layoutX="283.0" layoutY="190.0" />
+         </children>
+      </Pane>
+   </children>
+</VBox>
