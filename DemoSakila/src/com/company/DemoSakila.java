@@ -142,19 +142,19 @@ public class DemoSakila {
 
             case 'U': {
                 // TODO: Fer codi que demani els valors necessaris per a actualitzar una peli. Haureu de fer un WHERE per evitar fer un update massiu
+                int filmId = Utilities.llegirInt("Escriu la id de la pel·lícula que vols modificar.",1,1000);
                 String title = Utilities.llegirFrase("Escriu el nou títol de la pel·lícula.");
                 String description = Utilities.llegirFrase("Escriu la nova descripció de la pel·lícula.");
-                String filmId = Utilities.llegirFrase("Escriu la id de la pel·lícula que vols modificar.");
-                String query = "UPDATE film SET (title, description) VALUES (?, ?)";
+                String query = "UPDATE film SET title = ?, description = ? WHERE film_id = ?";
                 try (
                         PreparedStatement pStmt = con.prepareStatement(query);
                 ) {
                     pStmt.setString(1,title);
                     pStmt.setString(2,description);
-                    System.out.println(pStmt);
+                    pStmt.setInt(3,filmId);
                     pStmt.executeUpdate();
                 } catch (SQLException ex) {
-                    throw new Exception("Error reading records on table film:" + ex.getMessage(), ex);
+                    throw new Exception("Error updating records on table film:" + ex.getMessage(), ex);
                 }
                 break;
             }
